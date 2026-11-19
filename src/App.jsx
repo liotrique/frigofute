@@ -213,9 +213,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col justify-start items-center selection:bg-emerald-500 selection:text-white border-0 outline-none">
-      {/* Main App Container: Clean, borderless, looks like final app on any screen */}
-      <main className="w-full max-w-md min-h-screen bg-white flex flex-col overflow-hidden shadow-sm sm:shadow-lg sm:my-0 border-0 outline-none">
+    <div className="h-[100dvh] w-full bg-slate-100 flex flex-col justify-center items-center selection:bg-emerald-500 selection:text-white border-0 outline-none overflow-hidden p-0 sm:py-3">
+      {/* Main App Container: Fixed height, always shows bottom bar on both computer and mobile */}
+      <main className="w-full max-w-md h-full sm:h-[844px] sm:max-h-[94vh] bg-white flex flex-col overflow-hidden shadow-none sm:shadow-2xl sm:rounded-3xl border-0 outline-none relative">
         {/* Camera Flash Simulation Effect */}
         {cameraFlash && (
           <div className="absolute inset-0 bg-white z-50 pointer-events-none animate-in fade-in zoom-in duration-150" />
@@ -223,7 +223,7 @@ export default function App() {
 
         {/* Floating In-App Toast */}
         {toastMessage && (
-          <div className="fixed sm:absolute top-16 inset-x-4 max-w-sm mx-auto z-40 bg-slate-900/95 backdrop-blur-md text-white text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-xl flex items-center justify-between animate-in slide-in-from-top-3 fade-in duration-200">
+          <div className="absolute top-16 inset-x-4 max-w-sm mx-auto z-40 bg-slate-900/95 backdrop-blur-md text-white text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-xl flex items-center justify-between animate-in slide-in-from-top-3 fade-in duration-200">
             <span className="truncate pr-2">{toastMessage}</span>
             <button
               type="button"
@@ -238,15 +238,17 @@ export default function App() {
         {/* Native Safe Area Spacing on mobile */}
         <div className="h-[env(safe-area-inset-top,0px)] bg-white w-full shrink-0" />
 
-        {/* App Header */}
-        <Header
-          notifications={notifications}
-          onMarkAllRead={handleMarkAllRead}
-          onDismissNotif={handleDismissNotif}
-        />
+        {/* App Header (pinned at top) */}
+        <div className="shrink-0 z-20 bg-white">
+          <Header
+            notifications={notifications}
+            onMarkAllRead={handleMarkAllRead}
+            onDismissNotif={handleDismissNotif}
+          />
+        </div>
 
-        {/* Tab Views */}
-        <div className="flex-1 flex flex-col overflow-hidden bg-[#fbfdfb]">
+        {/* Tab Views (scrollable content area with min-h-0) */}
+        <div className="flex-1 min-h-0 flex flex-col overflow-hidden bg-[#fbfdfb]">
           {activeTab === 'fridge' && (
             <FridgeView
               inventory={inventory}
@@ -281,11 +283,11 @@ export default function App() {
           )}
         </div>
 
-        {/* Bottom Navigation */}
-        <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
-
-        {/* Safe Area Bottom on mobile */}
-        <div className="h-[env(safe-area-inset-bottom,0px)] bg-white w-full shrink-0" />
+        {/* Bottom Navigation (pinned at bottom, always visible) */}
+        <div className="shrink-0 z-20 bg-white">
+          <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+          <div className="h-[env(safe-area-inset-bottom,0px)] bg-white w-full" />
+        </div>
       </main>
 
       {/* Recipe Detail Modal (Figure 5) */}
