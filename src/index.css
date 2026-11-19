@@ -6,6 +6,7 @@ html, body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  background-color: #f1f5f9;
 }
 
 @layer base {
@@ -15,43 +16,48 @@ html, body {
   h1, h2, h3, h4, .font-heading {
     font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
   }
+  
+  /* Remove any default browser focus rings / purple outlines */
+  *:focus {
+    outline: none !important;
+  }
 }
 
 /* Modern Web Guidance: modal dialog scroll containment and backdrop */
+dialog {
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
 dialog:modal {
+  border: none !important;
+  outline: none !important;
   overscroll-behavior: contain;
 }
 
 dialog::backdrop {
+  border: none !important;
+  outline: none !important;
   overflow: hidden;
   overscroll-behavior: contain;
-  background-color: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(156, 163, 175, 0.5);
+  background: rgba(203, 213, 225, 0.6);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(107, 114, 128, 0.7);
-}
-
-/* Soft animations */
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.02); }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 2.5s infinite ease-in-out;
+  background: rgba(148, 163, 184, 0.8);
 }

@@ -49,7 +49,7 @@ export default function RecipesView({
         </div>
       </div>
 
-      {/* Purple Action Button: Générer de nouvelles idées (Figure 4) */}
+      {/* Purple Action Button: Générer de nouvelles idées matching Figure 4 */}
       <button
         type="button"
         onClick={() => {
@@ -57,23 +57,23 @@ export default function RecipesView({
           onGenerateNewIdeas();
         }}
         disabled={isGenerating}
-        className={`w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 active:scale-98 text-white font-heading font-bold text-sm shadow-md shadow-purple-600/30 flex items-center justify-center gap-2.5 transition-all duration-200 ${
+        className={`w-full py-3.5 px-4 rounded-2xl bg-[#7c5295] hover:bg-[#6c4485] active:scale-98 text-white font-heading font-bold text-sm flex items-center justify-center gap-2.5 transition-all duration-200 border-0 outline-none shadow-none ${
           isGenerating ? 'opacity-90 cursor-wait' : ''
         }`}
       >
-        <Sparkles className={`w-4 h-4 ${isGenerating ? 'animate-spin text-amber-300' : 'text-purple-200'}`} />
-        <span>{isGenerating ? 'L\'IA concocte de nouvelles recettes...' : 'Générer de nouvelles idées'}</span>
+        <Sparkles className="w-4 h-4 text-white" />
+        <span>{isGenerating ? 'Génération en cours...' : 'Générer de nouvelles idées'}</span>
       </button>
 
-      {/* AI Generating Indicator */}
+      {/* Generating Indicator */}
       {isGenerating && (
-        <div className="p-3 bg-purple-50 border border-purple-100 rounded-2xl text-xs text-purple-900 flex items-center gap-3 animate-in fade-in duration-200">
-          <div className="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center shrink-0 animate-spin">
+        <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs text-slate-700 flex items-center gap-3 animate-in fade-in duration-200">
+          <div className="w-6 h-6 rounded-full bg-[#7c5295] text-white flex items-center justify-center shrink-0 animate-spin">
             <Wand2 className="w-3.5 h-3.5" />
           </div>
           <div>
-            <p className="font-bold">Modèle IA FrigoFuté en action</p>
-            <p className="text-[11px] text-purple-700">Optimisation anti-gaspi selon vos préférences de repas...</p>
+            <p className="font-bold">Génération anti-gaspillage</p>
+            <p className="text-[11px] text-slate-500">Création de recettes avec vos aliments à risque...</p>
           </div>
         </div>
       )}

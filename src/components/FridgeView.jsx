@@ -27,7 +27,7 @@ export default function FridgeView({
   lastSyncTime 
 }) {
   const [selectedCaptureIdx, setSelectedCaptureIdx] = useState(0);
-  const [showAiDetections, setShowAiDetections] = useState(true);
+  const [showAiDetections, setShowAiDetections] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
 
@@ -109,98 +109,41 @@ export default function FridgeView({
         </div>
       )}
 
-      {/* Card: Dernières captures */}
+      {/* Card: Dernières captures matching Figure 3 */}
       <div className="bg-white rounded-3xl p-4 shadow-sm border border-slate-100">
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <h2 className="font-heading font-bold text-base text-slate-800">
-              Dernières captures
-            </h2>
-            <span className="text-[10px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-              Automatique
-            </span>
-          </div>
+          <h2 className="font-heading font-bold text-base text-slate-800">
+            Dernières captures
+          </h2>
 
-          <div className="flex items-center gap-1.5">
-            {/* Toggle AI detection view */}
-            <button
-              type="button"
-              onClick={() => {
-                sound.playPop();
-                setShowAiDetections(!showAiDetections);
-              }}
-              title={showAiDetections ? "Masquer la détection IA" : "Afficher la détection IA"}
-              className={`p-1.5 rounded-xl text-xs flex items-center gap-1 border transition-all ${
-                showAiDetections 
-                  ? 'bg-purple-50 text-purple-700 border-purple-200' 
-                  : 'bg-slate-50 text-slate-500 border-slate-200'
-              }`}
-            >
-              <Sparkles className="w-3.5 h-3.5 text-purple-600" />
-              <span className="text-[10px] font-semibold">IA</span>
-            </button>
-
-            {/* Camera action icon */}
-            <button
-              type="button"
-              onClick={() => {
-                sound.playShutter();
-                onSyncCamera();
-              }}
-              className="w-8 h-8 rounded-full bg-emerald-500 hover:bg-emerald-600 active:scale-90 text-white flex items-center justify-center shadow-md shadow-emerald-500/30 transition-all"
-              title="Prendre une photo maintenant"
-            >
-              <Camera className="w-4 h-4" />
-            </button>
-          </div>
+          {/* Camera action icon matching Figure 3 */}
+          <button
+            type="button"
+            onClick={() => {
+              sound.playShutter();
+              onSyncCamera();
+            }}
+            className="w-8 h-8 rounded-full bg-emerald-500 hover:bg-emerald-600 active:scale-90 text-white flex items-center justify-center shadow-sm shadow-emerald-500/20 transition-all border-none outline-none"
+            title="Prendre une photo maintenant"
+          >
+            <Camera className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Fridge Photo Carousel View */}
-        <div className="relative rounded-2xl overflow-hidden bg-slate-900 aspect-[16/10] border border-slate-200 shadow-inner group">
+        <div className="relative rounded-2xl overflow-hidden bg-slate-100 aspect-[16/10] border border-slate-200/80 shadow-inner group">
           <img
             src={activeCapture.url}
             alt={activeCapture.title}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
 
-          {/* AI Detection Bounding Boxes Overlay */}
-          {showAiDetections && activeCapture.detections && (
-            <div className="absolute inset-0 pointer-events-none">
-              {activeCapture.detections.map((det, i) => (
-                <div
-                  key={i}
-                  style={{
-                    position: 'absolute',
-                    top: det.top,
-                    left: det.left,
-                    width: det.width,
-                    height: det.height,
-                    borderColor: det.color,
-                  }}
-                  className="border-2 rounded-lg bg-black/10 backdrop-blur-[0.5px] transition-all animate-in fade-in duration-300"
-                >
-                  <span 
-                    style={{ backgroundColor: det.color }}
-                    className="absolute -top-3.5 left-0 text-[8px] font-mono font-bold text-white px-1.5 py-0.2 rounded shadow-sm whitespace-nowrap"
-                  >
-                    {det.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-
           {/* Bottom Photo Caption */}
-          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-2.5 flex items-center justify-between text-white">
+          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-2.5 flex items-center justify-between text-white">
             <div>
               <p className="text-xs font-semibold">{activeCapture.title}</p>
               <p className="text-[10px] text-slate-300">{activeCapture.time}</p>
             </div>
-            {showAiDetections && (
-              <span className="text-[9px] bg-purple-600/90 text-white px-2 py-0.5 rounded-full font-medium">
-                ✓ 4 objets identifiés
-              </span>
-            )}
           </div>
         </div>
 
