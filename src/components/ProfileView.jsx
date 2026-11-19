@@ -38,7 +38,7 @@ export default function ProfileView({
   };
 
   return (
-    <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-4 pb-16">
+    <div className="px-4 py-4 space-y-4">
       {/* User Header matching Figure 6 */}
       <div className="bg-white rounded-3xl p-4 shadow-sm border border-slate-100 flex items-center gap-3.5">
         <div className="w-13 h-13 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-heading font-extrabold text-xl shadow-md shadow-emerald-600/30">
