@@ -1,0 +1,25 @@
+{
+  "name": "frigofute",
+  "version": "1.0.0",
+  "description": "FrigoFuté - Prototype interactif anti-gaspillage pour parents occupés",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tunnel": "./cloudflared tunnel --url http://localhost:5173",
+    "start": "./start.sh"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@vitejs/plugin-react": "^6.3.0",
+    "canvas-confetti": "^1.9.4",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.76.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.5",
+    "vite": "^8.3.8"
+  }
+}
